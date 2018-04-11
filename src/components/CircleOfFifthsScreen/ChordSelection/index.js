@@ -32,21 +32,33 @@ class ChordSelection extends Component {
     let wordQuality;
     let third;
     let fifth;
+    let seventh;
     if (noFlatOrSharpQuality.includes('°')) {
       // handle diminished chord
       wordQuality = 'Diminished';
+      third = this.props.fifths[(this.props.fifths.findIndex(el => el.note === note) + 3) % 12].note;
+      fifth = this.props.fifths[(this.props.fifths.findIndex(el => el.note === note) + 6) % 12].note;
     } else if (/^[A-Z]+$/g.test(noFlatOrSharpQuality)) {
       // handle major
-      third = this.props.fifths[this.props.fifths.findIndex(el => el.note === note) - 4 % 12].note;
-      fifth = this.props.fifths[this.props.fifths.findIndex(el => el.note === note) - 1 % 12].note;
-      chord.push(third, fifth);
       wordQuality = 'Major';
+      third = this.props.fifths[(this.props.fifths.findIndex(el => el.note === note) + 8) % 12].note;
+      fifth = this.props.fifths[(this.props.fifths.findIndex(el => el.note === note) + 11) % 12].note;
     } else if (/^[a-z]+$/g.test(noFlatOrSharpQuality)) {
       // handle minor
       wordQuality = 'Minor';
+      third = this.props.fifths[(this.props.fifths.findIndex(el => el.note === note) + 3) % 12].note;
+      fifth = this.props.fifths[(this.props.fifths.findIndex(el => el.note === note) + 11) % 12].note;
     } else {
       // handle dominant
       wordQuality = 'Dominant';
+      third = this.props.fifths[(this.props.fifths.findIndex(el => el.note === note) + 8) % 12].note;
+      fifth = this.props.fifths[(this.props.fifths.findIndex(el => el.note === note) + 11) % 12].note;
+      seventh = this.props.fifths[(this.props.fifths.findIndex(el => el.note === note) + 2) % 12].note;
+    }
+
+    chord.push(third, fifth);
+    if (seventh !== undefined) {
+      chord.push(seventh);
     }
 
     this.setState({
