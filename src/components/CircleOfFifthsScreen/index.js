@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 import CofContainer from './CofContainer';
 import Sidebar from './Sidebar';
@@ -23,6 +23,8 @@ const CircleOfFifthsScreen = () => (
       <View
         style={{
           flex: 4,
+          flexDirection: 'column',
+          justifyContent: 'space-between',
         }}
       >
         <View
@@ -34,10 +36,31 @@ const CircleOfFifthsScreen = () => (
         </View>
         <View
           style={{
-            flex: 1,
+            flex: .75,
           }}
         >
           <ChordSelection />
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            flex: .1,
+          }}
+        >
+          <View
+            style={{
+              flex: .25,
+            }}
+          >
+          </View>
+          <View
+            style={{
+              alignItems: 'center',
+              flex: .75,
+            }}
+          >
+            <Text>V</Text>
+          </View>
         </View>
       </View>
       <View

@@ -73,10 +73,10 @@ class ChordSelection extends Component {
   render() {
     return (
       <View style={{
-          backgroundColor: 'whitesmoke',
           alignContent: 'center',
         }}
       >
+        <Text>Touch notes below to view chord structures:</Text>
         <ScrollView
           horizontal
           contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}

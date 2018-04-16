@@ -225,12 +225,12 @@ class CofContainer extends Component {
               />
               <Circle
                 radius={radius * (14 / 18)}
-                innerRadius={radius * (14 / 18) - 5}
+                innerRadius={radius * (14 / 18) - 2}
                 colors={new Array(12).fill('#000')}
               />
               <Circle
                 radius={radius / 2}
-                innerRadius={radius / 2 - 5}
+                innerRadius={radius / 2 - 2}
                 colors={new Array(12).fill('#000')}
               />
               { /* Circular text for current key */}
