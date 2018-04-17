@@ -19,10 +19,8 @@ const CircularText = props => (
           fill={props.colors[index]}
           font='bold 12px "Arial"'
           transform={new Transform().rotate(props.rotation)}
-          onClick={() => console.log('yo')}
-          onPress={() => console.log('yo')}
         >
-            {item}
+          {item}
         </Text>
       ))
     }

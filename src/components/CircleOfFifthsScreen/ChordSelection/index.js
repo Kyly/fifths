@@ -85,20 +85,20 @@ class ChordSelection extends Component {
           }}
         >
           {
-            this.props.fifths.filter(el => !!el.quality).map((el, i) => (
-              <TouchableWithoutFeedback
-                key={i}
-                onPress={() => {
-                  this.setChord(el.note, el.quality);
-                  this.toggleModal();
-                }}
-              >
-                <View style={{ padding: 10 }}>
-                  <Text style={{ color: colors[i] }} >{el.note}</Text>
-                  <Text style={{ color: colors[i] }} >{el.quality}</Text>
-                </View>
-              </TouchableWithoutFeedback>
-            ))
+            // this.props.fifths.filter(el => !!el.quality).map((el, i) => (
+            //   <TouchableWithoutFeedback
+            //     key={i}
+            //     onPress={() => {
+            //       this.setChord(el.note, el.quality);
+            //       this.toggleModal();
+            //     }}
+            //   >
+            //     <View style={{ padding: 10 }}>
+            //       <Text style={{ color: colors[i] }} >{el.note}</Text>
+            //       <Text style={{ color: colors[i] }} >{el.quality}</Text>
+            //     </View>
+            //   </TouchableWithoutFeedback>
+            // ))
           }
         </ScrollView>
         <Modal

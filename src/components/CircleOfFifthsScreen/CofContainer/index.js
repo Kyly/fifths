@@ -23,30 +23,6 @@ const {
   Text,
 } = ART;
 
-// const art = Platform.select({
-//   ios: (
-//     <View>
-//       <Circle
-//         radius={150}
-//         colors={[
-//           '#fa500a', '#ff0000', '#8700c3', '#5000c3',
-//           '#3200a5', '#0000ff', '#2dc3be', '#19c80a',
-//           '#8cff0a', '#ffff00', '#ffc30a', '#fa870a',
-//         ]}
-//       />
-//       <Circle
-//         radius={200}
-//         colors={[
-//           '#8cff0a', '#ffff00', '#ffc30a', '#fa870a',
-//           '#fa500a', '#ff0000', '#8700c3', '#5000c3',
-//           '#3200a5', '#0000ff', '#2dc3be', '#19c80a',
-//         ]}
-//       />
-//     </View>
-//   ),
-//   android: <CircleOfFifths />,
-// });
-
 const styles = StyleSheet.create({
   container: {
     // backgroundColor: 'whitesmoke',
@@ -67,7 +43,6 @@ class CofContainer extends Component {
     this.state = {
       currentTouch: {},
       lastTouch: {},
-      // brings c to top
       rotation: 195,
     };
 
@@ -119,9 +94,6 @@ class CofContainer extends Component {
           } else {
             this.setState({ lastTouch: this.state.currentTouch });
             this.setState({ currentTouch: { X: gestureState.moveX, Y: gestureState.moveY } });
-            console.log('WINDOW DIMENSIONS');
-            console.log(Dimensions.get('window').width / 2);
-            console.log(Dimensions.get('window').height * (3 / 4));
             const triangle = {
               // magic numbers
               radiusPoint: {
@@ -206,17 +178,6 @@ class CofContainer extends Component {
       <View style={styles.container}>
         <View {...this._panResponder.panHandlers}>
           <Surface width={Dimensions.get('window').width} height={Dimensions.get('window').height}>
-            <Group x={x} y={y}>
-              <Text
-                x={0}
-                y={-y / 2}
-                alignment="middle"
-                fill="#000"
-                font='bold 12px "Arial"'
-              >
-                V
-              </Text>
-            </Group>
             <Group x={x} y={y} transform={new Transform().rotate(this.state.rotation)}>
               <Circle
                 radius={radius}
@@ -235,19 +196,17 @@ class CofContainer extends Component {
               />
               { /* Circular text for current key */}
               <CircularText
-                data={this.props.fifths.map((el) => {
-                  if (!el.quality) {
-                    return '';
-                  }
-                  return el.quality;
-                })}
+                data={this.props.currentScale === 'maj' ?
+                  ['I', 'IV', '', '', '', '♭2', '♯4', 'vii°', 'iii', 'vi', 'ii', 'V7'] :
+                  ['i', 'iv', '♭VII', '♭III', '♭VI', '♭2', '♯4', '', '', '', 'ii°', 'V7']
+                }
                 rotation={-this.state.rotation}
                 colors={new Array(12).fill('#000')}
                 multiplier={1.45}
               />
               { /* Circular text for all notes */}
               <CircularText
-                data={this.props.fifths.map(el => el.note)}
+                data={this.props.fifths}
                 rotation={-this.state.rotation}
                 colors={new Array(12).fill('#000')}
                 multiplier={1.25}
@@ -255,12 +214,10 @@ class CofContainer extends Component {
               { /* Circular text for parallel notes */}
               {this.props.showParallel ?
                 <CircularText
-                  data={this.props.fifths.map((el) => {
-                    if (!el.parallel) {
-                      return '';
-                    }
-                    return el.parallel;
-                  })}
+                  data={this.props.currentScale !== 'maj' ?
+                    ['♯4', 'vii°', 'iii', 'vi', 'ii', 'V7', 'I', 'IV', '', '', '', '♭2'] :
+                    ['♯4', '', '', '', 'ii°', 'V7', 'i', 'iv', '♭VII', '♭III', '♭VI', '♭2']
+                  }
                   rotation={-this.state.rotation}
                   colors={new Array(12).fill('#000')}
                   multiplier={0.6}
@@ -269,12 +226,10 @@ class CofContainer extends Component {
               { /* Circular text for relative notes */}
               {this.props.showRelative ?
                 <CircularText
-                  data={this.props.fifths.map((el) => {
-                    if (!el.relative) {
-                      return '';
-                    }
-                    return el.relative;
-                  })}
+                  data={this.props.currentScale !== 'maj' ?
+                    ['♯4', 'vii°', 'iii', 'vi', 'ii', 'V7', 'I', 'IV', '', '', '', '♭2'] :
+                    ['♯4', '', '', '', 'ii°', 'V7', 'i', 'iv', '♭VII', '♭III', '♭VI', '♭2']
+                  }
                   rotation={-this.state.rotation}
                   colors={new Array(12).fill('#000')}
                   multiplier={1.85}
@@ -289,8 +244,8 @@ class CofContainer extends Component {
 }
 
 CofContainer.propTypes = {
-  keyObject: PropTypes.arrayOf(PropTypes.object).isRequired,
-  fifths: PropTypes.arrayOf(PropTypes.object).isRequired,
+  fifths: PropTypes.arrayOf(PropTypes.string).isRequired,
+  currentScale: PropTypes.string.isRequired,
   rotation: PropTypes.number.isRequired,
   changeKey: PropTypes.func.isRequired,
   showParallel: PropTypes.bool.isRequired,
@@ -298,9 +253,9 @@ CofContainer.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  keyObject: getKeyObject(state),
   fifths: fifths(state),
   rotation: rotation(state),
+  currentScale: state.keys.scale,
   currentKey: state.keys.currentKey,
   showParallel: state.keys.showParallel,
   showRelative: state.keys.showRelative,
