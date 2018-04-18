@@ -8,6 +8,7 @@ const reducer = (state = {
 }, action) => {
   switch (action.type) {
     case KEY_CHANGE: {
+      console.log('KEY CHANGE', action.newKey);
       return Object.assign({}, state, { currentKey: action.newKey });
     }
     case SCALE_CHANGE: {

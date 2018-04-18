@@ -24,10 +24,9 @@ const TouchableNote = (note, changeKeyFunc, color) => (
 );
 
 const Sidebar = (props) => {
-  const startIndex = props.keyObject.findIndex(el => Object.keys(el).includes('quality'));
+  let startIndex = tonalGravity.findIndex(el => el.note === props.currentKey);
+  startIndex -= props.currentScale === 'maj' ? 5 : 2;
   const endIndex = startIndex + 6;
-  console.log('start', props.keyObject[startIndex]);
-  console.log('end', props.keyObject[endIndex]);
   return (
     <ScrollView 
       contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
@@ -53,7 +52,7 @@ Sidebar.propTypes = {
 
 const mapStateToProps = state => ({
   currentKey: state.keys.currentKey,
-  keyObject: getKeyObject(state),
+  currentScale: state.keys.scale,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -32,9 +32,9 @@ const styles = StyleSheet.create({
 });
 
 const colors = [
-  '#8cff0a', '#ffff00', '#ffc30a', '#fa870a',
-  '#fa500a', '#ff0000', '#8700c3', '#5000c3',
-  '#3200a5', '#0000ff', '#0D6485', '#19c80a',
+  '#0000ff', '#0D6485', '#19c80a', '#8cff0a',
+  '#ffff00', '#ffc30a', '#fa870a', '#fa500a',
+  '#ff0000', '#8700c3', '#5000c3', '#3200a5', 
 ];
 
 class CofContainer extends Component {
@@ -43,12 +43,11 @@ class CofContainer extends Component {
     this.state = {
       currentTouch: {},
       lastTouch: {},
-      rotation: 195,
+      rotation: 165,
     };
 
     // set up rotation of circle
     this._setUpGestureHandler();
-    this._lockWheel();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -68,7 +67,7 @@ class CofContainer extends Component {
       }
     }
     const index = rotateMappings.indexOf(curr);
-    const newRoot = this.props.fifths.map(el => el.note)[index];
+    const newRoot = this.props.fifths[index];
     console.log('NEW ROOT', newRoot);
     this.props.changeKey(newRoot);
   }
@@ -197,8 +196,8 @@ class CofContainer extends Component {
               { /* Circular text for current key */}
               <CircularText
                 data={this.props.currentScale === 'maj' ?
-                  ['I', 'IV', '', '', '', '♭2', '♯4', 'vii°', 'iii', 'vi', 'ii', 'V7'] :
-                  ['i', 'iv', '♭VII', '♭III', '♭VI', '♭2', '♯4', '', '', '', 'ii°', 'V7']
+                  ['♯4', 'vii°', 'iii', 'vi', 'ii', 'V7', 'I', 'IV', '', '', '', '♭2'] :
+                  ['♯4', '', '', '', 'ii°', 'V7', 'i', 'iv', '♭VII', '♭III', '♭VI', '♭2']
                 }
                 rotation={-this.state.rotation}
                 colors={new Array(12).fill('#000')}

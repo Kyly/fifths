@@ -36,24 +36,24 @@ class ChordSelection extends Component {
     if (noFlatOrSharpQuality.includes('°')) {
       // handle diminished chord
       wordQuality = 'Diminished';
-      third = this.props.fifths[(this.props.fifths.findIndex(el => el.note === note) + 3) % 12].note;
-      fifth = this.props.fifths[(this.props.fifths.findIndex(el => el.note === note) + 6) % 12].note;
+      third = this.props.fifths[(this.props.fifths.findIndex(el => el === note) + 3) % 12];
+      fifth = this.props.fifths[(this.props.fifths.findIndex(el => el === note) + 6) % 12];
     } else if (/^[A-Z]+$/g.test(noFlatOrSharpQuality)) {
       // handle major
       wordQuality = 'Major';
-      third = this.props.fifths[(this.props.fifths.findIndex(el => el.note === note) + 8) % 12].note;
-      fifth = this.props.fifths[(this.props.fifths.findIndex(el => el.note === note) + 11) % 12].note;
+      third = this.props.fifths[(this.props.fifths.findIndex(el => el === note) + 8) % 12];
+      fifth = this.props.fifths[(this.props.fifths.findIndex(el => el === note) + 11) % 12];
     } else if (/^[a-z]+$/g.test(noFlatOrSharpQuality)) {
       // handle minor
       wordQuality = 'Minor';
-      third = this.props.fifths[(this.props.fifths.findIndex(el => el.note === note) + 3) % 12].note;
-      fifth = this.props.fifths[(this.props.fifths.findIndex(el => el.note === note) + 11) % 12].note;
+      third = this.props.fifths[(this.props.fifths.findIndex(el => el === note) + 3) % 12];
+      fifth = this.props.fifths[(this.props.fifths.findIndex(el => el === note) + 11) % 12];
     } else {
       // handle dominant
       wordQuality = 'Dominant';
-      third = this.props.fifths[(this.props.fifths.findIndex(el => el.note === note) + 8) % 12].note;
-      fifth = this.props.fifths[(this.props.fifths.findIndex(el => el.note === note) + 11) % 12].note;
-      seventh = this.props.fifths[(this.props.fifths.findIndex(el => el.note === note) + 2) % 12].note;
+      third = this.props.fifths[(this.props.fifths.findIndex(el => el === note) + 8) % 12];
+      fifth = this.props.fifths[(this.props.fifths.findIndex(el => el === note) + 11) % 12];
+      seventh = this.props.fifths[(this.props.fifths.findIndex(el => el === note) + 2) % 12];
     }
 
     chord.push(third, fifth);
@@ -71,6 +71,12 @@ class ChordSelection extends Component {
   toggleModal = () => this.setState({ showModal: !this.state.showModal });
 
   render() {
+    // TODO set up object { note: , quality: }
+    const scale = this.props.currentScale === 'maj' ? ['vii°', 'iii', 'vi', 'ii', 'V7', 'I', 'IV'] : ['ii°', 'V7', 'i', 'iv', '♭VII', '♭III', '♭VI'];
+    const fifthsIntoScale = this.props.currentScale === 'maj' ? this.props.fifths.filter((el, i) => (i > 0 && i < 8)) : this.props.fifths.filter((el, i) => (i > 3 && i < 11));
+    const notesAndQualities = fifthsIntoScale.map((el, i) => ({ note: el, quality: scale[i] }));
+    console.log(notesAndQualities);
+
     return (
       <View style={{
           alignContent: 'center',
@@ -85,20 +91,20 @@ class ChordSelection extends Component {
           }}
         >
           {
-            // this.props.fifths.filter(el => !!el.quality).map((el, i) => (
-            //   <TouchableWithoutFeedback
-            //     key={i}
-            //     onPress={() => {
-            //       this.setChord(el.note, el.quality);
-            //       this.toggleModal();
-            //     }}
-            //   >
-            //     <View style={{ padding: 10 }}>
-            //       <Text style={{ color: colors[i] }} >{el.note}</Text>
-            //       <Text style={{ color: colors[i] }} >{el.quality}</Text>
-            //     </View>
-            //   </TouchableWithoutFeedback>
-            // ))
+            notesAndQualities.map((el, i) => (
+              <TouchableWithoutFeedback
+                key={i}
+                onPress={() => {
+                  this.setChord(el.note, el.quality);
+                  this.toggleModal();
+                }}
+              >
+                <View style={{ padding: 10 }}>
+                  <Text style={{ color: colors[i] }} >{el.note}</Text>
+                  <Text style={{ color: colors[i] }} >{el.quality}</Text>
+                </View>
+              </TouchableWithoutFeedback>
+            ))
           }
         </ScrollView>
         <Modal
@@ -125,6 +131,8 @@ ChordSelection.propTypes = {
 
 const mapStateToProps = state => ({
   fifths: fifths(state),
+  currentScale: state.keys.scale,
+  currentKey: state.keys.currentKey,
 });
 
 export default connect(mapStateToProps, null)(ChordSelection);

@@ -10,8 +10,8 @@ const {
 const CircularText = props => (
   <Group>
     {
-      props.data.map((item, index) => (
-        <Text
+      props.data.map((item, index) =>
+        (<Text
           key={index}
           x={props.centroids[index][0] * props.multiplier}
           y={props.centroids[index][1] * props.multiplier}

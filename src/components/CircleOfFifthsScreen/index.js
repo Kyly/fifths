@@ -39,6 +39,7 @@ const CircleOfFifthsScreen = () => (
             flex: .75,
           }}
         >
+          <ChordSelection />
         </View>
         <View
           style={{
@@ -67,6 +68,7 @@ const CircleOfFifthsScreen = () => (
           flex: 1,
         }}
       >
+        <Sidebar />
       </View>
     </View>
     <View
