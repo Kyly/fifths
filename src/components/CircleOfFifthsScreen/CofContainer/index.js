@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 
 import { getKeyObject, fifths, rotation } from '../../../selectors/keys';
 import rotateMappings from '../../../static/rotationMappings';
+import colors from '../../../static/colors';
 import { changeKey } from '../../../actions/keys';
 import _distanceBetweenTwoPoints from '../../../util/geometry';
 import Circle from './Circle';
@@ -30,12 +31,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-const colors = [
-  '#0000ff', '#0D6485', '#19c80a', '#8cff0a',
-  '#ffff00', '#ffc30a', '#fa870a', '#fa500a',
-  '#ff0000', '#8700c3', '#5000c3', '#3200a5', 
-];
 
 class CofContainer extends Component {
   constructor(props) {

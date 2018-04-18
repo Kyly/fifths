@@ -3,15 +3,11 @@ import PropTypes from 'prop-types';
 import { ScrollView, TouchableWithoutFeedback, View, Text, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { tonalGravity } from '../../../static/keySignatures';
+import colors from '../../../static/colors';
 import { changeKey } from '../../../actions/keys';
 import { getKeyObject } from '../../../selectors/keys';
 
 const windowHeight = Dimensions.get('window').height;
-const colors = [
-  '#8cff0a', '#ffff00', '#ffc30a', '#fa870a',
-  '#fa500a', '#ff0000', '#8700c3', '#5000c3',
-  '#3200a5', '#0000ff', '#0D6485', '#19c80a',
-];
 
 const TouchableNote = (note, changeKeyFunc, color) => (
   <TouchableWithoutFeedback key={note} onPress={() => changeKeyFunc(note)}>
@@ -38,7 +34,7 @@ const Sidebar = (props) => {
     >
       {tonalGravity.filter((el, i) => (i < startIndex)).map(el => TouchableNote(el.note, props.changeKey))}
       <View style={{ backgroundColor: '#2a2a2a' }}>
-        {tonalGravity.filter((el, i) => (i >= startIndex && i <= endIndex)).map((el, i) => TouchableNote(el.note, props.changeKey, colors[i]))}
+        {tonalGravity.filter((el, i) => (i >= startIndex && i <= endIndex)).map((el, i) => TouchableNote(el.note, props.changeKey, colors[i + 1]))}
       </View>
       {tonalGravity.filter((el, i) => (i > endIndex)).map(el => TouchableNote(el.note, props.changeKey))}
     </ScrollView>

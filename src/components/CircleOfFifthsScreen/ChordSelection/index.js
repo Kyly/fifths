@@ -5,15 +5,10 @@ import { View, TouchableWithoutFeedback, TouchableOpacity, ScrollView, Text, Dim
 import Modal from 'react-native-modal';
 
 import { fifths } from '../../../selectors/keys';
+import colors from '../../../static/colors';
 
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
-
-const colors = [
-  '#8cff0a', '#ffff00', '#ffc30a', '#fa870a',
-  '#fa500a', '#ff0000', '#8700c3', '#5000c3',
-  '#3200a5', '#0000ff', '#0D6485', '#19c80a',
-];
 
 class ChordSelection extends Component {
   constructor(props) {
@@ -100,8 +95,8 @@ class ChordSelection extends Component {
                 }}
               >
                 <View style={{ padding: 10 }}>
-                  <Text style={{ color: colors[i] }} >{el.note}</Text>
-                  <Text style={{ color: colors[i] }} >{el.quality}</Text>
+                  <Text style={{ color: colors[i + 1] }} >{el.note}</Text>
+                  <Text style={{ color: colors[i + 1] }} >{el.quality}</Text>
                 </View>
               </TouchableWithoutFeedback>
             ))

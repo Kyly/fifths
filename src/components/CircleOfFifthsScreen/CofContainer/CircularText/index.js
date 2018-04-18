@@ -17,7 +17,7 @@ const CircularText = props => (
           y={props.centroids[index][1] * props.multiplier}
           alignment="middle"
           fill={props.colors[index]}
-          font='bold 12px "Arial"'
+          font='bold 10px "Helvetica"'
           transform={new Transform().rotate(props.rotation)}
         >
           {item}
