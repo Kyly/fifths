@@ -53,7 +53,6 @@ class CofContainer extends Component {
 
   _lockWheel() {
     const rotationCurrent = (this.state.rotation % 360 + 360) % 360;
-    console.log(rotationCurrent);
     // get closest rotate value
     let curr = rotateMappings[0];
     for (let i = 0; i < rotateMappings.length; i++) {
@@ -63,7 +62,6 @@ class CofContainer extends Component {
     }
     const index = rotateMappings.indexOf(curr);
     const newRoot = this.props.fifths[index];
-    console.log('NEW ROOT', newRoot);
     this.props.changeKey(newRoot);
   }
 
@@ -181,12 +179,12 @@ class CofContainer extends Component {
               <Circle
                 radius={radius * (14 / 18)}
                 innerRadius={radius * (14 / 18) - 2}
-                colors={new Array(12).fill('#000')}
+                colors={new Array(12).fill('#2a2a2a')}
               />
               <Circle
                 radius={radius / 2}
                 innerRadius={radius / 2 - 2}
-                colors={new Array(12).fill('#000')}
+                colors={new Array(12).fill('#2a2a2a')}
               />
               { /* Circular text for current key */}
               <CircularText
@@ -195,25 +193,25 @@ class CofContainer extends Component {
                   ['♯4', '', '', '', 'ii°', 'V7', 'i', 'iv', '♭VII', '♭III', '♭VI', '♭2']
                 }
                 rotation={-this.state.rotation}
-                colors={new Array(12).fill('#000')}
-                multiplier={1.45}
+                colors={new Array(12).fill('#2a2a2a')}
+                multiplier={1.35}
               />
               { /* Circular text for all notes */}
               <CircularText
                 data={this.props.fifths}
                 rotation={-this.state.rotation}
-                colors={new Array(12).fill('#000')}
-                multiplier={1.25}
+                colors={new Array(12).fill('#2a2a2a')}
+                multiplier={1.16}
               />
               { /* Circular text for parallel notes */}
               {this.props.showParallel ?
                 <CircularText
                   data={this.props.currentScale !== 'maj' ?
-                    ['♯4', 'vii°', 'iii', 'vi', 'ii', 'V7', 'I', 'IV', '', '', '', '♭2'] :
-                    ['♯4', '', '', '', 'ii°', 'V7', 'i', 'iv', '♭VII', '♭III', '♭VI', '♭2']
+                    ['', 'vii°', 'iii', 'vi', 'ii', 'V7', 'I', 'IV', '', '', '', ''] :
+                    ['', '', '', '', 'ii°', 'V7', 'i', 'iv', '♭VII', '♭III', '♭VI', '']
                   }
                   rotation={-this.state.rotation}
-                  colors={new Array(12).fill('#000')}
+                  colors={new Array(12).fill('#2a2a2a')}
                   multiplier={0.6}
                 /> : null
               }
@@ -221,12 +219,12 @@ class CofContainer extends Component {
               {this.props.showRelative ?
                 <CircularText
                   data={this.props.currentScale !== 'maj' ?
-                    ['♯4', 'vii°', 'iii', 'vi', 'ii', 'V7', 'I', 'IV', '', '', '', '♭2'] :
-                    ['♯4', '', '', '', 'ii°', 'V7', 'i', 'iv', '♭VII', '♭III', '♭VI', '♭2']
+                    ['', '', '', '', 'vii°', 'iii', 'vi', 'ii', 'V7', 'I', 'IV', ''] :
+                    ['', 'ii°', 'V7', 'i', 'iv', '♭VII', '♭III', '♭VI', '', '', '', '',]
                   }
                   rotation={-this.state.rotation}
-                  colors={new Array(12).fill('#000')}
-                  multiplier={1.85}
+                  colors={new Array(12).fill('#2a2a2a')}
+                  multiplier={1.82}
                 /> : null
               }
             </Group>

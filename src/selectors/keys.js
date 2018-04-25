@@ -1,15 +1,10 @@
 import { createSelector } from 'reselect';
 import { majorQualities, minorQualities, tonalGravity } from '../static/keySignatures';
 
-/*
-** key array
-** [ { quality: '', parallel: '', relative: '', } ]
-*/
-
+// gets the 12 intervals of five related to the current key
 export const fifths = createSelector(
   state => state.keys.currentKey,
   (key) => {
-    // TODO handle mapping double flats and sharps
     const index = tonalGravity.findIndex(el => el.note === key);
     if ((index - 6 < 0) || (index + 5 > 28)) {
       return new Array(12).fill('');
@@ -21,12 +16,11 @@ export const fifths = createSelector(
         return null;
       }
     }).map(el => el.note);
-    console.log(notes);
-    console.log('key', key);
     return notes;
   },
 );
 
+// returns the correct rotation angle to put the new root to the top
 export const rotation = createSelector(
   state => state.keys.currentKey,
   state => fifths(state),

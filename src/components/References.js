@@ -1,10 +1,10 @@
 import { default as React, Component } from 'react';
 import { Platform, ScrollView, StyleSheet, Text, View, } from 'react-native';
-import component from 'create-react-class';
 import { perfect_fifth_markdown_text, musical_gravity_markdown_text, rules_for_chords_markdown_text, enharmonic_equivalents_markdown_text } from '../static/markdown.js'
 
 // For Left<-->Right page swiping
 import { default as Swiper } from 'react-native-swiper';
+import component from 'create-react-class';
 
 // f(component, props, childElements) => element
 const e = function(component, props, children) {
@@ -32,7 +32,7 @@ const eReferences =
 // StyleSheet
 const swipeStyles = StyleSheet.create({
     wrapper: {
-	marginTop: 50,
+	marginTop: 21,
     },
     slide1: {
 	flex: 1,
@@ -84,8 +84,4 @@ const cReferences = component({
 
 // component
 // accessed by the Main Menu sidebar
-// export const ReferencesContainer = function () { 
-//     //return e(View, {}, eReferences);
-//     return e(cReferences);
-// }
 export default cReferences;

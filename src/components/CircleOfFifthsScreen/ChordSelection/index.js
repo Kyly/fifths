@@ -66,11 +66,10 @@ class ChordSelection extends Component {
   toggleModal = () => this.setState({ showModal: !this.state.showModal });
 
   render() {
-    // TODO set up object { note: , quality: }
+    // setting up array of { note: , quality: }
     const scale = this.props.currentScale === 'maj' ? ['vii°', 'iii', 'vi', 'ii', 'V7', 'I', 'IV'] : ['ii°', 'V7', 'i', 'iv', '♭VII', '♭III', '♭VI'];
     const fifthsIntoScale = this.props.currentScale === 'maj' ? this.props.fifths.filter((el, i) => (i > 0 && i < 8)) : this.props.fifths.filter((el, i) => (i > 3 && i < 11));
     const notesAndQualities = fifthsIntoScale.map((el, i) => ({ note: el, quality: scale[i] }));
-    console.log(notesAndQualities);
 
     return (
       <View style={{

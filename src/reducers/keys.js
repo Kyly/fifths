@@ -8,8 +8,61 @@ const reducer = (state = {
 }, action) => {
   switch (action.type) {
     case KEY_CHANGE: {
-      console.log('KEY CHANGE', action.newKey);
-      return Object.assign({}, state, { currentKey: action.newKey });
+      //map key to an acceptable one if it's above F# or below Gb
+      let key = action.newKey;
+      switch (key) {
+        case 'Cx' : {
+          key = 'D';
+          break;
+        }
+        case 'Fx' : {
+          key = 'G';
+          break;
+        }
+        case 'B♯' : {
+          key = 'C';
+          break;
+        }
+        case 'E♯' : {
+          key = 'F';
+          break;
+        }
+        case 'A♯' : {
+          key = 'B♭';
+          break;
+        }
+        case 'D♯' : {
+          key = 'E♭';
+          break;
+        }
+        case 'G♯' : {
+          key = 'A♭';
+          break;
+        }
+        case 'C♯' : {
+          key = 'D♭';
+          break;
+        }
+        case 'C♭' : {
+          key = 'B';
+          break;
+        }
+        case 'F♭' : {
+          key = 'E';
+          break;
+        }
+        case 'B♭♭' : {
+          key = 'A';
+          break;
+        }
+        case 'E♭♭' : {
+          key = 'D';
+          break;
+        }
+        default:
+          break;
+      }
+      return Object.assign({}, state, { currentKey: key });
     }
     case SCALE_CHANGE: {
       return Object.assign({}, state, { scale: action.scale });

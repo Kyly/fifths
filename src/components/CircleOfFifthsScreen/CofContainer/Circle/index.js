@@ -65,7 +65,6 @@ class Circle extends Component {
 
     this.props.setCentroids(centers);
 
-    console.log(this.state.centroids);
     // put C to top
     const cIndex = 5;
     const currentStartAngle = arcs[cIndex].startAngle * (180 / Math.PI);

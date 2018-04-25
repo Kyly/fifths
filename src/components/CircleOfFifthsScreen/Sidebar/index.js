@@ -42,7 +42,6 @@ const Sidebar = (props) => {
 };
 
 Sidebar.propTypes = {
-  keyObject: PropTypes.arrayOf(PropTypes.object).isRequired,
   changeKey: PropTypes.func.isRequired,
 };
 
