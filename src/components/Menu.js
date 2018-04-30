@@ -1,6 +1,6 @@
 import { DrawerNavigator } from 'react-navigation';
 import CircleOfFifthsScreen from './CircleOfFifthsScreen';
-import { ReferencesContainer } from './References';
+import ReferencesContainer from './References';
 import { CompositionContainer } from './Composition';
 
 const RootDrawer = DrawerNavigator({
