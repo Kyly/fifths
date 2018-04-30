@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "Fifths",
+    "name": "Perfect Fifth",
     "icon": "./app-icon.png",
     "version": "1.0.0",
     "sdkVersion": "25.0.0",
-    "slug": "exp.host/@omalleya/fifths",
+    "slug": "fifths",
     "ios": {
-      "bundleIdentifier": "com.tritone.fifths"
+      "bundleIdentifier": "com.tritone.perfectfifth"
     },
     "android": {
-      "package": "com.tritone.fifths"
+      "package": "com.tritone.perfectfifth"
     }
   }
 }
